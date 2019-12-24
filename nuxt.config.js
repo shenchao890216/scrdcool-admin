@@ -43,13 +43,16 @@ module.exports = {
     // Doc: https://bootstrap-vue.js.org
     'bootstrap-vue/nuxt',
     // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    // Doc: https://github.com/nuxt-community/dotenv-module
+    '@nuxtjs/dotenv'
   ],
   /*
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
+    proxy: true
   },
   /*
   ** Build configuration
@@ -59,6 +62,14 @@ module.exports = {
     ** You can extend webpack config here
     */
     extend (config, ctx) {
+    }
+  },
+  proxy: {
+    '/amdin': {
+      target: 'http://api.scrdcool.com'
+      // pathRewrite: {
+      //   '^/api' : '/'
+      // }
     }
   }
 }
