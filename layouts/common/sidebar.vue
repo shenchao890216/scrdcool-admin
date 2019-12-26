@@ -1,12 +1,20 @@
 <template>
   <div class="sidebar">
-    sidebar
+    <UserPanel />
+    <SidebarMenu />
   </div>
 </template>
 
 <script>
+import UserPanel from '~/components/UserPanel'
+import SidebarMenu from '~/components/SidebarMenu'
+
 export default {
-  name: 'CommonSidebar'
+  name: 'CommonSidebar',
+  components: {
+    UserPanel,
+    SidebarMenu
+  }
 }
 </script>
 

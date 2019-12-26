@@ -72,7 +72,7 @@ import md5 from 'md5'
 
 export default {
   layout: 'blank',
-  name: 'UserRegister',
+  name: 'PageUserRegister',
   data () {
     return {
       form: {
@@ -89,7 +89,7 @@ export default {
       // 1. 组织默认事件.
       e.preventDefault()
 
-      // 3. 校验参数.
+      // 2. 校验参数.
 
       // 3. 组织请求参数.
       const registerData = {
