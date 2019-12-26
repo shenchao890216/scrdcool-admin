@@ -12,6 +12,12 @@ export default {
 
 <style lang="scss">
 .sidebar {
-  background: #0f0;
+  position: fixed;
+  top: 60px;
+  left: 0;
+  width: 230px;
+  min-height: 100%;
+  border-right: 1px solid rgba(0, 0, 0, .05);
+  background: #333;
 }
 </style>

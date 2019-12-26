@@ -45,14 +45,16 @@ module.exports = {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     // Doc: https://github.com/nuxt-community/dotenv-module
-    '@nuxtjs/dotenv'
+    '@nuxtjs/dotenv',
+    '@nuxtjs/proxy'
   ],
   /*
   ** Axios module configuration
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
-    proxy: true
+    proxy: true,
+    debug: true
   },
   /*
   ** Build configuration
@@ -65,11 +67,11 @@ module.exports = {
     }
   },
   proxy: {
-    '/amdin': {
-      target: 'http://api.scrdcool.com'
-      // pathRewrite: {
-      //   '^/api' : '/'
-      // }
+    '/admin': {
+      target: 'http://api.scrdcool.com:8888',
+      pathRewrite: {
+        '^/admin': '/'
+      }
     }
   }
 }
