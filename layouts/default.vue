@@ -1,10 +1,8 @@
 <template>
-  <div id="main">
+  <div id="sec-main-body">
     <Header />
     <Sidebar />
-    <div class="sec-main-content">
-      <nuxt />
-    </div>
+    <nuxt />
     <Footer />
   </div>
 </template>
@@ -25,9 +23,4 @@ export default {
 </script>
 
 <style lang="scss">
-.sec-main-content {
-  margin-top: 60px;
-  margin-left: 230px;
-  min-height: 1000px;
-}
 </style>

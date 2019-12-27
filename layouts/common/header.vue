@@ -1,7 +1,6 @@
 <template>
   <div class="main-header">
     <Logo />
-    fdsfa
   </div>
 </template>
 
@@ -24,5 +23,7 @@ export default {
   width: 100%;
   height: 60px;
   box-shadow: 2px 4px 20px -4px rgba(0, 0, 0, .1);
+  background: #fff;
+  z-index: 10000;
 }
 </style>
