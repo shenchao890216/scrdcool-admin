@@ -1,7 +1,7 @@
 <template>
   <div class="sidebar">
     <UserPanel />
-    <SidebarMenu />
+    <SidebarMenu :sidebarNav="sidebarNav" />
   </div>
 </template>
 
@@ -14,6 +14,39 @@ export default {
   components: {
     UserPanel,
     SidebarMenu
+  },
+  data () {
+    return {
+      sidebarNav: [{
+        menuHeader: '头部',
+        menuItems: [{
+          title: '一级导航',
+          url: '#1',
+          isTreeview: false
+        }, {
+          title: '二级导航',
+          url: '#',
+          isTreeview: true,
+          childMenus: [{
+            title: '子导航',
+            url: '#2'
+          }, {
+            title: '子导航2',
+            url: '#3'
+          }, {
+            title: '子导航3',
+            url: '#3'
+          }]
+        }]
+      }, {
+        menuHeader: '头部2',
+        menuItems: [{
+          title: '一级导航',
+          url: '#',
+          isTreeview: false
+        }]
+      }]
+    }
   }
 }
 </script>
@@ -23,9 +56,11 @@ export default {
   position: fixed;
   top: 60px;
   left: 0;
+  bottom: 0;
   width: 230px;
-  min-height: 100%;
   border-right: 1px solid rgba(0, 0, 0, .05);
   background: #333;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 </style>
