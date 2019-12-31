@@ -8,9 +8,11 @@
     <div>
       <no-ssr>
         <mavon-editor
+          ref="mavonEditor"
           v-model="value"
           @imgAdd="imgAdd"
           :style="editorStyle"
+          :toolbars="toolbarsObj"
         ></mavon-editor>
         <b-button @click="getCkeditorContent">
           hehe
@@ -37,6 +39,37 @@ export default {
         minHeight: '500px',
         height: '500px'
       },
+      toolbarsObj: {
+        'bold': true,
+        'italic': true,
+        'header': true,
+        'underline': true,
+        'strikethrough': true,
+        'mark': true,
+        'superscript': true,
+        'subscript': true,
+        'quote': true,
+        'ol': true,
+        'ul': true,
+        'link': true,
+        'imagelink': true,
+        'code': true,
+        'table': true,
+        'undo': true,
+        'redo': true,
+        'trash': false,
+        'save': false,
+        'alignleft': true,
+        'aligncenter': true,
+        'alignright': true,
+        'navigation': true,
+        'subfield': true,
+        'fullscreen': true,
+        'readmodel': true,
+        'htmlcode': true,
+        'help': true,
+        'preview': true
+      },
       breadcrumbItems: [{
         html: '<i class="iconfont icon-shouye"></i>',
         href: '/'
@@ -51,6 +84,10 @@ export default {
     getCkeditorContent () {
       // eslint-disable-next-line no-console
       console.log(this.value)
+      // eslint-disable-next-line no-console
+      // console.log(this.$mavonEditor.markdownIt.render(this.value))
+      // eslint-disable-next-line no-console
+      console.log(this.$refs.mavonEditor.markdownIt.render(this.value))
     },
     imgAdd (pos, $file) {
       // eslint-disable-next-line no-console
