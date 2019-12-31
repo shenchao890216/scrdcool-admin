@@ -18,10 +18,10 @@ export default {
   data () {
     return {
       sidebarNav: [{
-        menuHeader: '头部',
+        menuHeader: '文章',
         menuItems: [{
-          title: '一级导航',
-          url: '#1',
+          title: '新建文章',
+          url: '/post/new',
           isTreeview: false
         }, {
           title: '二级导航',

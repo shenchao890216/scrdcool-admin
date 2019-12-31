@@ -1,6 +1,6 @@
 <template>
   <li
-    @click.prevent="itemtreeClickHandle"
+    @click="itemtreeClickHandle"
     :class="{ 'sec-sidebar-menu-itemtree': isTreeview }"
     class="sec-sidebar-menu-item"
   >
@@ -8,7 +8,7 @@
       :class="{
         active: itemActive
       }"
-      href="#"
+      :href="url"
     >
       <span>{{ title }}</span>
       <i
@@ -47,6 +47,11 @@ export default {
       type: String,
       default: '标题'
     },
+    // 链接.
+    url: {
+      type: String,
+      default: '#'
+    },
     // 子导航.
     childMenus: {
       type: Array,
@@ -66,8 +71,9 @@ export default {
     }
   },
   methods: {
-    itemtreeClickHandle () {
+    itemtreeClickHandle (event) {
       if (this.isTreeview) {
+        event.preventDefault()
         this.itemtreeShow = !this.itemtreeShow
         this.itemActive = !this.itemActive
         this.itemArrowLeft = !this.itemArrowLeft

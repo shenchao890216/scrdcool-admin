@@ -19,6 +19,7 @@
     "bootstrap-vue": "^2.0.0",
     "cross-env": "^5.2.0",
     "koa": "^2.6.2",
+    "mavon-editor": "^2.7.7",
     "md5": "^2.2.1",
     "nuxt": "^2.0.0"
   },

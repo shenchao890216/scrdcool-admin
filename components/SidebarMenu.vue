@@ -1,13 +1,14 @@
 <template>
   <ul class="sec-sidebar-menu">
-    <template v-for="sidebarNavItem in sidebarNav">
+    <template v-for="(sidebarNavItem, parentIndex) in sidebarNav">
       <SidebarMenuHeader :title="sidebarNavItem.menuHeader" />
       <SidebarMenuItem
-        v-for="(menuItem, index) in sidebarNavItem.menuItems"
+        v-for="(menuItem, childIndex) in sidebarNavItem.menuItems"
         :is-treeview="menuItem.isTreeview"
         :title="menuItem.title"
+        :url="menuItem.url"
         :childMenus="menuItem.childMenus"
-        :key="('1-' + index)"
+        :key="(`${parentIndex} - ${childIndex}`)"
       />
     </template>
   </ul>
