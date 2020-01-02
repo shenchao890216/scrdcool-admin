@@ -71,6 +71,7 @@ module.exports = {
   proxy: {
     '/admin': {
       target: 'http://api.scrdcool.com:8888',
+      // changeOrigin: true,
       pathRewrite: {
         '^/admin': '/'
       }

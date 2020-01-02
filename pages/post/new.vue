@@ -6,7 +6,7 @@
       </MainContentHeader>
     </template>
     <div>
-      <no-ssr>
+      <client-only>
         <mavon-editor
           ref="mavonEditor"
           v-model="value"
@@ -17,7 +17,7 @@
         <b-button @click="getCkeditorContent">
           hehe
         </b-button>
-      </no-ssr>
+      </client-only>
     </div>
   </MainContent>
 </template>
@@ -88,10 +88,29 @@ export default {
       // console.log(this.$mavonEditor.markdownIt.render(this.value))
       // eslint-disable-next-line no-console
       console.log(this.$refs.mavonEditor.markdownIt.render(this.value))
+      this.$axios({
+        url: '/admin/upload/banner',
+        method: 'get'
+      }).then((res) => {
+        // eslint-disable-next-line no-console
+        console.log(res)
+      })
     },
     imgAdd (pos, $file) {
       // eslint-disable-next-line no-console
       console.log($file)
+      const formdata = new FormData()
+      formdata.append('myimg', $file)
+      this.$axios({
+        url: '/admin/upload/banner',
+        method: 'post',
+        data: formdata,
+        headers: { 'Content-Type': 'multipart/form-data' }
+      }).then((url) => {
+        // eslint-disable-next-line no-console
+        console.log(url)
+        this.$refs.mavonEditor.$img2Url(pos, url.data.url)
+      })
     }
   }
 }
