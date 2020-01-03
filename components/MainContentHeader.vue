@@ -19,6 +19,7 @@ export default {
 .sec-main-content-header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 15px 30px;
   background: #fff;
   .breadcrumb {

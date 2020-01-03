@@ -105,7 +105,7 @@ export default {
       // console.log(this.form)
 
       // 5. 请求.
-      const { code, msg } = this.$axios.post('/admin/user/register', registerData)
+      const { code, msg } = this.$axios.post('/api/user/register', registerData)
 
       // 6. 结果处理.
       if (code === 0) {

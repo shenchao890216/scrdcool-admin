@@ -69,11 +69,11 @@ module.exports = {
     }
   },
   proxy: {
-    '/admin': {
+    '/api': {
       target: 'http://api.scrdcool.com:8888',
       // changeOrigin: true,
       pathRewrite: {
-        '^/admin': '/'
+        '^/api': ''
       }
     }
   }
