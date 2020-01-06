@@ -29,6 +29,7 @@ export default {
     color: #222;
     a {
       color: #222;
+      text-decoration: none;
     }
     .breadcrumb-item + .breadcrumb-item::before {
       color: #ccc;

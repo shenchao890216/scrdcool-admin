@@ -18,10 +18,22 @@ export default {
   data () {
     return {
       sidebarNav: [{
-        menuHeader: '文章',
+        menuHeader: '文章管理',
         menuItems: [{
           title: '新建文章',
           url: '/post/new',
+          isTreeview: false
+        }, {
+          title: '文章列表',
+          url: '/post/list',
+          isTreeview: false
+        }, {
+          title: '标签列表',
+          url: '/tag/list',
+          isTreeview: false
+        }, {
+          title: '分类列表',
+          url: '/post/list',
           isTreeview: false
         }, {
           title: '二级导航',
@@ -39,11 +51,23 @@ export default {
           }]
         }]
       }, {
-        menuHeader: '头部2',
+        menuHeader: '其他',
         menuItems: [{
-          title: '一级导航',
+          title: '网站底部设置',
           url: '#',
           isTreeview: false
+        }, {
+          title: '社交媒体设置',
+          url: '/post/list',
+          isTreeview: false
+        }, {
+          title: '用户管理',
+          url: '#',
+          isTreeview: true,
+          childMenus: [{
+            title: '用户列表',
+            url: '#'
+          }]
         }]
       }]
     }

@@ -26,17 +26,6 @@
         ></b-form-input>
       </b-form-group>
       <b-form-group
-        label="文章标签："
-      >
-        <TagsInput
-          v-model="selectedTags"
-          :existing-tags="tags"
-          :typeahead="true"
-          placeholder="请输入标签"
-          element-id="tags"
-        ></TagsInput>
-      </b-form-group>
-      <b-form-group
         label="文章内容："
         label-for=""
       >
@@ -59,27 +48,21 @@ import MainContentHeader from '~/components/MainContentHeader'
 import MainContent from '~/components/MainContent'
 
 export default {
-  name: 'PostNew',
+  name: 'PostEdit',
   components: {
     MainContent,
     MainContentHeader
   },
   data () {
     return {
-      // tags: [
-      //   { key: 'web-development', value: 'Web Development' },
-      //   { key: 'php', value: 'PHP' },
-      //   { key: 'javascript', value: 'JavaScript' }
-      // ],
-      selectedTags: [],
       // 文章标题.
-      postTitle: '',
+      // postTitle: '',
       // 文章内容.
-      postContent: '',
+      // postContent: '',
       // 编辑器样式修改.
       editorStyle: {
-        minHeight: '700px',
-        height: '700px',
+        minHeight: '500px',
+        height: '500px',
         border: '1px solid #ced4da',
         boxShadow: 'none !important'
       },
@@ -120,28 +103,18 @@ export default {
         html: '<i class="iconfont icon-shouye"></i>',
         href: '/'
       }, {
-        text: '新建文章',
-        href: '/post/new',
+        text: '编辑文章',
+        href: '#',
         active: true
       }]
     }
   },
-  async asyncData ({ $axios }) {
-    const { data } = await $axios.$get('/api/tag/list')
-    // eslint-disable-next-line no-console
-    console.log(data)
-
-    const tags = data.map((tag) => {
-      const { id, name } = tag
-      return {
-        id,
-        key: name,
-        value: name
-      }
-    })
-
+  async asyncData ({ $axios, params }) {
+    const { data } = await $axios.$get(`/api/post/${params.id}`)
     return {
-      tags
+      postContent: data.origin_content,
+      postTitle: data.title,
+      postId: data.id
     }
   },
   methods: {
@@ -159,20 +132,10 @@ export default {
       // 2. 防止暴力点击.
 
       // 3. 提交数据.
-      // eslint-disable-next-line no-console
-      console.log(this.selectedTags)
-
-      const postTags = []
-
-      for (const tag of this.selectedTags) {
-        postTags.push(tag.id)
-      }
-
-      this.$axios.$post('/api/post/new', {
+      this.$axios.$post(`/api/post/${this.postId}`, {
         postTitle: this.postTitle,
         postOriginContent: this.postContent,
-        postContent: this.$refs.mavonEditor.markdownIt.render(this.postContent),
-        postTags
+        postContent: this.$refs.mavonEditor.markdownIt.render(this.postContent)
       }).then((res) => {
         // eslint-disable-next-line no-console
         console.log(res)
@@ -191,135 +154,10 @@ export default {
         headers: { 'Content-Type': 'multipart/form-data' }
       }).then((url) => {
         // eslint-disable-next-line no-console
-        console.log(url)
+        // console.log(url)
         this.$refs.mavonEditor.$img2Url(pos, url.data.url)
       })
     }
   }
 }
 </script>
-
-<style lang="scss">
-/* The input */
-.tags-input {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-}
-
-.tags-input input {
-  flex: 1;
-  background: transparent;
-  border: none;
-}
-
-.tags-input input:focus {
-  outline: none;
-}
-
-.tags-input input[type="text"] {
-  color: #495057;
-}
-
-.tags-input-wrapper-default {
-  padding: 0.375rem 0.75rem;
-  background: #fff;
-  border: 1px solid #dbdbdb;
-  border-radius: .25rem;
-}
-
-/* The tag badges & the remove icon */
-.tags-input span {
-  margin-right: 0.3rem;
-}
-
-.tags-input-remove {
-  cursor: pointer;
-  position: relative;
-  display: inline-block;
-  width: 0.5rem;
-  height: 0.5rem;
-  overflow: hidden;
-}
-
-.tags-input-remove:before, .tags-input-remove:after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  top: 50%;
-  left: 0;
-  background: #ff4500;
-
-  height: 2px;
-  margin-top: -1px;
-}
-
-.tags-input-remove:before {
-  transform: rotate(45deg);
-}
-.tags-input-remove:after {
-  transform: rotate(-45deg);
-}
-
-/* Tag badge styles */
-.tags-input-badge {
-  display: inline-block;
-  padding: 0.25em 0.4em;
-  font-size: 75%;
-  font-weight: 700;
-  line-height: 1;
-  text-align: center;
-  white-space: nowrap;
-  vertical-align: baseline;
-  border-radius: 0.25rem;
-}
-
-.tags-input-badge-pill {
-  padding-right: 0.6em;
-  padding-left: 0.6em;
-  border-radius: 10rem;
-}
-
-.tags-input-badge-selected-default {
-  color: #212529;
-  background-color: #f0f1f2;
-}
-
-/* Typeahead */
-.typeahead-hide-btn {
-  color: #999 !important;
-  font-style: italic;
-}
-
-/* Typeahead - badges */
-.typeahead-badges > span {
-  cursor: pointer;
-  margin-right: 0.3rem;
-}
-
-/* Typeahead - dropdown */
-.typeahead-dropdown {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-  position: absolute;
-  width: 100%;
-  z-index: 1000;
-}
-
-.typeahead-dropdown li {
-  padding: .25rem 1rem;
-  cursor: pointer;
-}
-
-/* Typeahead elements style/theme */
-.tags-input-typeahead-item-default {
-  color: #fff;
-  background-color: #343a40;
-}
-
-.tags-input-typeahead-item-highlighted-default {
-  color: #fff;
-  background-color: #007bff;
-}
-</style>

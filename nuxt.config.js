@@ -1,6 +1,9 @@
 
 module.exports = {
   mode: 'universal',
+  router: {
+    middleware: 'userAuth'
+  },
   /*
   ** Headers of the page
   */
@@ -29,7 +32,8 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    { src: '~plugins/mavoneditor.js', mode: 'client' }
+    { src: '~plugins/mavoneditor.js', mode: 'client' },
+    '~/plugins/vuetagsinput.js'
   ],
   /*
   ** Nuxt.js dev-modules

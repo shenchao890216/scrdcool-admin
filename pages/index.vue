@@ -6,6 +6,10 @@
       </MainContentHeader>
     </template>
     <div>sdfdsfsdfsd</div>
+    <a href="/post/list">文章列表1</a>
+    <nuxt-link to="/post/list">
+      文章列表2
+    </nuxt-link>
   </MainContent>
 </template>
 
