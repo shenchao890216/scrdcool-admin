@@ -81,7 +81,8 @@ export default {
         minHeight: '700px',
         height: '700px',
         border: '1px solid #ced4da',
-        boxShadow: 'none !important'
+        boxShadow: 'none !important',
+        zIndex: '1001'
       },
       // 编辑器工具栏.
       toolbarsObj: {

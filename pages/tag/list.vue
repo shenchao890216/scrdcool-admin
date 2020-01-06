@@ -14,7 +14,26 @@
       </MainContentHeader>
     </template>
     <div>
-      fjkdsajfldjsaf
+      <b-table
+        :fields="fields"
+        :items="tags"
+      >
+        <template v-slot:cell(operation)="data">
+          <b-button
+            :href="`/post/${data.item.id}`"
+            variant="primary"
+            size="sm"
+          >
+            编辑
+          </b-button>
+          <b-button
+            variant="danger"
+            size="sm"
+          >
+            删除
+          </b-button>
+        </template>
+      </b-table>
     </div>
 
     <b-modal
@@ -41,6 +60,7 @@
 </template>
 
 <script>
+import moment from 'moment'
 import MainContentHeader from '~/components/MainContentHeader'
 import MainContent from '~/components/MainContent'
 
@@ -66,13 +86,31 @@ export default {
       // 新建标签form data.
       newTagForm: {
         name: ''
-      }
+      },
+      fields: [
+        { key: 'id', label: 'ID' },
+        { key: 'name', label: '标签名称' },
+        { key: 'created_time', label: '创建时间' },
+        { key: 'operation', label: '操作' }
+      ]
     }
   },
   async asyncData ({ $axios }) {
     const { data } = await $axios.$get('/api/tag/list')
     // eslint-disable-next-line no-console
     console.log(data)
+
+    const tags = data.map((tag) => {
+      return {
+        id: tag.id,
+        name: tag.name,
+        created_time: moment(tag.createdAt).format('YYYY-MM-DD kk:mm')
+      }
+    })
+
+    return {
+      tags
+    }
   },
   methods: {
     newTag () {
