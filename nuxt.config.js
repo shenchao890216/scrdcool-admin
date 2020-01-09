@@ -74,7 +74,7 @@ module.exports = {
   },
   proxy: {
     '/api': {
-      target: 'http://api.scrdcool.com:8888',
+      target: 'http://api.scrdcool.com',
       // changeOrigin: true,
       pathRewrite: {
         '^/api': ''
