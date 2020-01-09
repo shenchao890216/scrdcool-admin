@@ -31,10 +31,10 @@ export default function ({ route, req, res, redirect }) {
     const cookie = parseCookie(req.headers.cookie)
     // eslint-disable-next-line no-console
     console.log(cookie)
-    if (!cookie.token || cookie.token - 0 !== 1) {
-      // eslint-disable-next-line no-console
-      redirect('/user/login')
-    }
+    // if (!cookie.token || cookie.token - 0 !== 1) {
+    //   // eslint-disable-next-line no-console
+    //   redirect('/user/login')
+    // }
   }
 
   if (isClient) {

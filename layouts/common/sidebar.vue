@@ -33,22 +33,8 @@ export default {
           isTreeview: false
         }, {
           title: '分类列表',
-          url: '/post/list',
+          url: '/category/list',
           isTreeview: false
-        }, {
-          title: '二级导航',
-          url: '#',
-          isTreeview: true,
-          childMenus: [{
-            title: '子导航',
-            url: '#2'
-          }, {
-            title: '子导航2',
-            url: '#3'
-          }, {
-            title: '子导航3',
-            url: '#3'
-          }]
         }]
       }, {
         menuHeader: '其他',

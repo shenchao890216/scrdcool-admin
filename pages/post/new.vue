@@ -26,6 +26,14 @@
         ></b-form-input>
       </b-form-group>
       <b-form-group
+        label="文章分类："
+      >
+        <b-form-select
+          v-model="selectedCategory"
+          :options="categories"
+        ></b-form-select>
+      </b-form-group>
+      <b-form-group
         label="文章标签："
       >
         <TagsInput
@@ -66,6 +74,7 @@ export default {
   },
   data () {
     return {
+      selectedCategory: null,
       // tags: [
       //   { key: 'web-development', value: 'Web Development' },
       //   { key: 'php', value: 'PHP' },
@@ -128,11 +137,12 @@ export default {
     }
   },
   async asyncData ({ $axios }) {
-    const { data } = await $axios.$get('/api/tag/list')
+    const { data: tagsData } = await $axios.$get('/api/tag/list')
+    const { data: categoriesData } = await $axios.$get('/api/category/list')
     // eslint-disable-next-line no-console
-    console.log(data)
+    console.log(tagsData)
 
-    const tags = data.map((tag) => {
+    const tags = tagsData.map((tag) => {
       const { id, name } = tag
       return {
         id,
@@ -141,8 +151,22 @@ export default {
       }
     })
 
+    const categories = categoriesData.map((category) => {
+      const { id, name } = category
+      return {
+        value: id,
+        text: name
+      }
+    })
+
+    categories.unshift({
+      value: null,
+      text: '请选择一个分类'
+    })
+
     return {
-      tags
+      tags,
+      categories
     }
   },
   methods: {
@@ -173,6 +197,7 @@ export default {
         postTitle: this.postTitle,
         postOriginContent: this.postContent,
         postContent: this.$refs.mavonEditor.markdownIt.render(this.postContent),
+        postCategory: this.selectedCategory,
         postTags
       }).then((res) => {
         // eslint-disable-next-line no-console
