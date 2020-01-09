@@ -4,7 +4,7 @@ module.exports = {
     script: 'server/index.js',
     instances: 1,
     watch: true,
-    ignore_watch: ['node_modules', '.idea'],
+    ignore_watch: ['node_modules', '.nuxt', '.idea'],
     max_memory_restart: '500M',
     env: {
       NODE_ENV: 'development'
